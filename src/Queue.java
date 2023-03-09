@@ -10,53 +10,56 @@
 
 
 import java.util.NoSuchElementException;
+import java.util.LinkedList;
 
 public class Queue<T> {
 
-	//TODO:  You need some data to store the queue.  Put the attributes here.
+	LinkedList<T> queue = new LinkedList<T>();
 
-	
+
 	/**
 	 * Constructs an empty Queue.
 	 */
 	public Queue () {
 	    //TODO: Write the Queue constructor
 	}
-	
+
 	/**
 	 * Returns true if the queue is empty
 	 */
 	public boolean isEmpty () {
-	    //TODO:  Needs to return true when empty and false otherwise
-	    return true;
+		return queue.isEmpty();
 	}
-	
-	
+
+
 	/**
 	 * Returns the element at the head of the queue
 	 */
 	public T peek () throws NoSuchElementException {
-		return null; //DELETE AND CHANGE TO SOMETHING SENSIBLE
+		return queue.getFirst(); //DELETE AND CHANGE TO SOMETHING SENSIBLE
 	}
-	
+
 	/**
 	 * Removes the front element of the queue
 	 */
 	public void dequeue () throws NoSuchElementException {
-	    //Dequeue code is neede here
+		queue.removeFirst();
 	}
-	
+
 	/**
 	 * Puts an element on the back of the queue.
 	 */
 	public void enqueue (T element) {
 	    //Enqueue code is needed here
+		queue.addLast(element);
 	}
-	
+
 	/**
 	 * Method to print the full contents of the queue in order from head to tail.
 	 */
 	public void print () {
-	    //Code to print the code is needed here
+		for(var i = 0; i < queue.size(); i++){
+			System.out.println(queue.get(i));
+		}
 	}
 }

@@ -19,28 +19,14 @@ public class ReadShapeFile {
 	// given the Scanner passed as a parameter. I would suggest static
 	// methods in this case.
 
-	private static void getData(String input){
-		Scanner in = new Scanner(input);
-		String shape = in.next();
-		String insertionTime = in.next();
-		String x = in.next();
-		String y = in.next();
-		String vx = in.next();
-		String vy = in.next();
-		String isFilled = in.next();
-		String diameter = in.next();
-		String colour = in.next();
-		in.close();
-		switch(shape) {
-			case "circle":
-				makeCircle(Integer.parseInt(insertionTime), Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(vx), Integer.parseInt(vy), Integer.parseInt(diameter), Boolean.parseBoolean(isFilled));
-		}
+	private static Circle makeCircle(int intim, int x, int y, int vx, int vy, int diameter, boolean isFilled, Color color){
+		Circle circle = new Circle(intim, x, y, vx, vy, diameter, color, isFilled);
+		System.out.println(circle);
+		return circle;
 	}
 
+	private static void makeOval(){
 
-	private static void makeCircle(int intim, int x, int y, int vx, int vy, int diameter, boolean isFilled){
-		Circle circle = new Circle(intim, x, y, vx, vy, diameter, null, isFilled);
-		System.out.println(circle);
 	}
 
 	private static void rect(){
@@ -53,8 +39,39 @@ public class ReadShapeFile {
 	 * @return the queue represented by the data file
 	 */
 	private static Queue<ClosedShape> readLineByLine(Scanner in) {
+
 		Queue<ClosedShape> shapeQueue = new Queue<ClosedShape>();
-		
+
+		do{
+			String shape = in.next();
+			String insertionTime = in.next();
+			String x = in.next();
+			String y = in.next();
+			String vx = in.next();
+			String vy = in.next();
+			String isFilled = in.next();
+			int r, g, b;
+	
+			switch(shape) {
+				case "circle":
+					String diameter = in.next();
+					r = Integer.parseInt(in.next());
+					g = Integer.parseInt(in.next());
+					b = Integer.parseInt(in.next());
+					Color color = Color.rgb(r, g, b);
+					shapeQueue.enqueue(makeCircle(Integer.parseInt(insertionTime), Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(vx), Integer.parseInt(vy), Integer.parseInt(diameter), Boolean.parseBoolean(isFilled), color));
+	
+				case "oval":
+					//String width = in.next();
+					//String height = in.next();
+					//r = Integer.parseInt(in.next());
+					//g = Integer.parseInt(in.next());
+					//b = Integer.parseInt(in.next());
+					makeOval();
+			}
+
+	
+		}while(in.hasNextLine());
 
 		//Right now, returning an empty Queue.  You need to change this.
 		return shapeQueue;
@@ -83,10 +100,6 @@ public class ReadShapeFile {
 		try{
 			File shapeFile = new File(filename);
 			in = new Scanner(shapeFile);
-			while(in.hasNextLine()){
-				ReadShapeFile.getData(in.nextLine());
-			}
-			in.close();
 		}catch (FileNotFoundException e){
 			System.out.println("Could not find " + filename);
 			System.exit(0);
