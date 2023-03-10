@@ -43,34 +43,39 @@ public class ReadShapeFile {
 		Queue<ClosedShape> shapeQueue = new Queue<ClosedShape>();
 
 		do{
-			String shape = in.next();
-			String insertionTime = in.next();
-			String x = in.next();
-			String y = in.next();
-			String vx = in.next();
-			String vy = in.next();
-			String isFilled = in.next();
+
+			String[] split = in.nextLine().split("\\s+");
+
+			String shape = split[0];
+			String insertionTime = split[1];
+			String x = split[2];
+			String y = split[3];
+			String vx = split[4];
+			String vy = split[5];
+			String isFilled = split[6];
 			int r, g, b;
-	
+
 			switch(shape) {
-				case "circle":
-					String diameter = in.next();
-					r = Integer.parseInt(in.next());
-					g = Integer.parseInt(in.next());
-					b = Integer.parseInt(in.next());
+
+				case "circle":		
+					System.out.println(shape);
+					String diameter = split[7];
+					r = Integer.parseInt(split[8]);
+					g = Integer.parseInt(split[9]);
+					b = Integer.parseInt(split[10]);
 					Color color = Color.rgb(r, g, b);
 					shapeQueue.enqueue(makeCircle(Integer.parseInt(insertionTime), Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(vx), Integer.parseInt(vy), Integer.parseInt(diameter), Boolean.parseBoolean(isFilled), color));
-	
+
 				case "oval":
-					//String width = in.next();
-					//String height = in.next();
-					//r = Integer.parseInt(in.next());
-					//g = Integer.parseInt(in.next());
-					//b = Integer.parseInt(in.next());
+					String width = split[7];
+					String height = split[8];
+					r = Integer.parseInt(split[9]);
+					g = Integer.parseInt(split[10]);
+					b = Integer.parseInt(split[11]);
 					makeOval();
 			}
 
-	
+
 		}while(in.hasNextLine());
 
 		//Right now, returning an empty Queue.  You need to change this.
