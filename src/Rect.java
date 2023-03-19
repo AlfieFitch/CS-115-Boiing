@@ -23,7 +23,7 @@ public class Rect extends ClosedShape {
      * @param color - The line or fill colour of the rectangle.
      * @param isFilled - boolean value that is true if the rectangle is filled with colour.
      */
-    public Rect (int instertionTime, int x, int y, int vx, int vy, int height, int width, Color colour, boolean isFilled){
+    public Rect (int instertionTime, int x, int y, int vx, int vy, int width, int height, Color colour, boolean isFilled){
         super(instertionTime, x, y, vx, vy, colour, isFilled);
         this.height = height;
         this.width = width;
@@ -45,6 +45,10 @@ public class Rect extends ClosedShape {
         this.width = width;
     }
 
+        /**
+     * Draws the rectangle.
+     * @param g The graphics object of the drawable component.
+     */
     public void draw(GraphicsContext g){
         g.setFill(colour);
         g.setStroke(colour);
@@ -55,11 +59,11 @@ public class Rect extends ClosedShape {
         }
     }
 
-    @Override
+    /** Method to convert the rectangle to a string to be printed. */
     public String toString(){
         String result = "This is a rectangle\n";
         result += super.toString();
-        result += "It's height is " + this.height + ", and it's width is " + this.width + "\n";
+        result += "Its width is " + this.width + " and its height is " + this.height + "\n";
         return result;
     }
 }
